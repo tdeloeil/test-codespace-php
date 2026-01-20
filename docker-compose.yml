@@ -1,27 +1,42 @@
 services:
   php:
-    image: mcr.microsoft.com/devcontainers/php:1-8.2-bullseye
+    build:
+      context: .
+      dockerfile: .devcontainer/Dockerfile
     volumes:
       - ./:/var/www/html
       - ./.devcontainer/apache-config.conf:/etc/apache2/sites-available/000-default.conf
     ports:
       - "8080:80"
     command: apache2-foreground
+    environment:
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
     depends_on:
-      - mysql
+      mysql:
+        condition: service_healthy
 
   mysql:
     image: mysql:8.0
     environment:
       MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: myapp
-      MYSQL_USER: dev
-      MYSQL_PASSWORD: devpassword
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_USER: ${DB_USER}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
     ports:
       - "3306:3306"
     volumes:
       - mysql-data:/var/lib/mysql
       - ./db/init:/docker-entrypoint-initdb.d
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-uroot", "-prootpassword"]
+      interval: 5s
+      timeout: 10s
+      retries: 10
+      start_period: 15s
 
     adminer:
     image: adminer:latest
