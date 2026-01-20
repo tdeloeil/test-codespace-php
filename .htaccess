@@ -1,0 +1,12 @@
+RewriteEngine On
+RewriteBase /
+
+# Exclure /public et ses sous-dossiers
+RewriteCond %{REQUEST_URI} !^/public [NC]
+
+# Ne pas réécrire si fichier/répertoire existe
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Tout rediriger vers index.php racine
+RewriteRule ^(.*)$ index.php [QSA,L]
