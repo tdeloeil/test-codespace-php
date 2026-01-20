@@ -33,10 +33,10 @@ services:
       - ./db/init:/docker-entrypoint-initdb.d
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-uroot", "-prootpassword"]
-      interval: 5s
-      timeout: 10s
+      interval: 2s
+      timeout: 5s
       retries: 10
-      start_period: 15s
+      start_period: 5s
 
   adminer:
     image: adminer:latest
@@ -55,7 +55,6 @@ services:
       - "3000:3000"
     environment:
       GF_SECURITY_ADMIN_PASSWORD: admin
-      GF_INSTALL_PLUGINS: grafana-clock-panel,grafana-simple-json-datasource
     volumes:
       - grafana-data:/var/lib/grafana
     depends_on:
