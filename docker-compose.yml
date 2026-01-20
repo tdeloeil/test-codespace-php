@@ -3,6 +3,7 @@ services:
     image: mcr.microsoft.com/devcontainers/php:1-8.2-bullseye
     volumes:
       - ./:/var/www/html
+      - ./.devcontainer/apache-config.conf:/etc/apache2/sites-available/000-default.conf
     ports:
       - "8080:80"
     command: apache2-foreground
