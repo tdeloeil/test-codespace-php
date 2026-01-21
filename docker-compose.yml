@@ -58,14 +58,10 @@
         - ./grafana/provisioning:/etc/grafana/provisioning:ro
         - ./grafana/grafana.ini:/etc/grafana/grafana.ini:ro
       depends_on:
-        mysql:
-          condition: service_healthy
-        tempo:
-          condition: service_started
-        loki:
-          condition: service_started
-        prometheus:
-          condition: service_started
+        - mysql
+        - tempo
+        - loki
+        - prometheus
     otel-collector:
       image: otel/opentelemetry-collector-contrib:latest
       container_name: otel-collector
@@ -115,7 +111,7 @@
       restart: unless-stopped
       volumes:
         # - ./promtail/promtail-config.yml:/etc/promtail/config.yml:ro
-        - /var/log:/var/log:ro
+        # - /var/log:/var/log:ro
       command: -config.file=/etc/promtail/config.yml
   volumes:
     mysql-data:
