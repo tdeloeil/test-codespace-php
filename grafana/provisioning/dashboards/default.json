@@ -1,0 +1,45 @@
+{
+  "id": null,
+  "title": "User Growth Dashboard",
+  "tags": ["auto-generated"],
+  "timezone": "browser",
+  "panels": [
+    {
+      "id": 1,
+      "title": "Évolution des utilisateurs",
+      "type": "timeseries",
+      "datasource": "MySQL",
+      "targets": [
+        {
+          "rawSql": "SELECT $__timeGroup(created_at, '1d') AS time, COUNT(*) AS value FROM users WHERE $__timeFilter(created_at) GROUP BY 1 ORDER BY time",
+          "format": "time_series",
+          "datasource": "MySQL"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "custom": {
+            "lineWidth": 2,
+            "fillOpacity": 10
+          },
+          "unit": "short"
+        }
+      },
+      "transformations": [
+        {
+          "id": "calculateField",
+          "options": {
+            "mode": "cumulativeFunctions",
+            "calculation": "sum",
+            "fields": ["value"],
+            "alias": "Total cumulé",
+            "replaceAllFields": true
+          }
+        }
+      ],
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 0 }
+    }
+  ],
+  "time": { "from": "now-30d", "to": "now" },
+  "version": 1
+}
