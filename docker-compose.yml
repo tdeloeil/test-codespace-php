@@ -1,5 +1,6 @@
   services:
     php:
+      container_name: php
       build:
         context: .
         dockerfile: .devcontainer/Dockerfile
@@ -31,6 +32,7 @@
           condition: service_healthy
 
     mysql:
+      container_name: mysql
       image: mysql:8.0
       environment:
         MYSQL_ROOT_PASSWORD: rootpassword
@@ -50,6 +52,7 @@
         start_period: 5s
 
     adminer:
+      container_name: adminer
       image: adminer:latest
       ports:
         - "8081:8080"
@@ -60,6 +63,7 @@
         mysql:
           condition: service_healthy
     grafana:
+      container_name: grafana
       image: grafana/grafana:latest
       ports:
         - "3000:3000"
@@ -75,6 +79,7 @@
         - loki
         - prometheus
     otel-collector:
+      container_name: otel-collector
       image: otel/opentelemetry-collector-contrib:latest
       restart: unless-stopped
       command: ["--config=/etc/otel-collector-config.yaml"]
@@ -84,6 +89,7 @@
         - 4317:4317
         - 8889:8889
     tempo:
+      container_name: tempo
       image: grafana/tempo:latest
       restart: unless-stopped
       command: ["-config.file=/etc/tempo.yaml"]
@@ -93,6 +99,7 @@
       ports:
         - 3200:3200
     prometheus:
+      container_name: prometheus
       image: prom/prometheus:latest
       restart: unless-stopped
       ports:
@@ -106,6 +113,7 @@
         - --enable-feature=exemplar-storage
         - --enable-feature=native-histograms
     loki:
+      container_name: loki
       image: grafana/loki:latest
       restart: unless-stopped
       ports:
@@ -114,6 +122,7 @@
         # - ./loki/loki-config.yml:/etc/loki/local-config.yaml:ro
         - loki_data:/loki
     promtail:
+      container_name: promtail
       image: grafana/promtail:latest
       restart: unless-stopped
       volumes:

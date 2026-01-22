@@ -13,7 +13,7 @@ exporters:
   prometheus:
     endpoint: "0.0.0.0:8889"
   otlp/logs:
-    endpoint: "http://loki:3100/otlp"
+    endpoint: "loki:3100/otlp"
   otlp/tempo:
   debug:
     verbosity: detailed
