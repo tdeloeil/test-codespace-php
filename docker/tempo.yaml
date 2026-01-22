@@ -18,5 +18,6 @@ ingester:
 
 storage:
   trace:
+    backend: local
     local:
       path: /var/tempo/blocks

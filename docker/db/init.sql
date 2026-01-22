@@ -7,8 +7,8 @@ CREATE TABLE IF NOT EXISTS users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-INSERT INTO users (name, email) VALUES
-    ('Alice Dupont', 'alice@example.com'),
-    ('Bob Martin', 'bob@example.com'),
-    ('Charlie Durand', 'charlie@example.com', '2026-01-21 10:30:00')
+INSERT INTO users (name, email, created_at) VALUES
+    ('Alice Dupont', 'alice@example.com', NOW()),
+    ('Bob Martin', 'bob@example.com', NOW()),
+    ('Charlie Durand', 'charlie@example.com', DATE_SUB(NOW(), INTERVAL 2 DAY))
 ON DUPLICATE KEY UPDATE name = VALUES(name);

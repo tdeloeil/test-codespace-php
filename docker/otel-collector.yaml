@@ -26,14 +26,14 @@ service:
       exporters: [otlp_http/loki]
     metrics:
       receivers: [otlp]
-      processors: [groupbyattrs, batch]
+      processors: [batch]
       exporters: [prometheus]
     # metrics:
     # receivers: [otlp]
     # processors: [cumulativetodelta]
     # exporters: [prometheus]
 
-    # traces:
-    #  receivers: [otlp]
-    #  processors: [batch]
-    #  exporters: [otlp/tempo]
+    traces:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [otlp/tempo]
