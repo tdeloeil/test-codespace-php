@@ -3,14 +3,28 @@
   "dockerComposeFile": "../docker-compose.yml",
   "service": "php",
   "workspaceFolder": "/var/www/html",
-  
-  "forwardPorts": [8080, 8081, 3000],
-  "portsAttributes": {
-    "8080": {"label": "Application PHP"},
-    "8081": {"label": "phpMyAdmin"},
-    "3000": {"label": "Grafana"}
+  "features": {
+    "ghcr.io/devcontainers/features/docker-outside-of-docker:1": {}
   },
-  
+  "remoteEnv": {
+    "DOCKER_API_VERSION": "1.43"
+  },
+  "forwardPorts": [
+    8080,
+    8081,
+    3000
+  ],
+  "portsAttributes": {
+    "8080": {
+      "label": "Application PHP"
+    },
+    "8081": {
+      "label": "phpMyAdmin"
+    },
+    "3000": {
+      "label": "Grafana"
+    }
+  },
   "customizations": {
     "vscode": {
       "extensions": [
@@ -23,8 +37,5 @@
       }
     }
   },
-  
-  "postCreateCommand": "if [ -f composer.json ]; then composer install; fi",
-  
-  "remoteUser": "vscode"
+  "postCreateCommand": "if [ -f composer.json ]; then composer install; fi"
 }

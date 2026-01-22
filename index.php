@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/vendor/autoload.php';
+
 use Monolog\Logger;
 use OpenTelemetry\API\Globals;
 use OpenTelemetry\Contrib\Logs\Monolog\Handler;
@@ -27,3 +29,5 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 var_dump($users);
 
 $logger->info('Fetched users from database', ['user_count' => count($users)]);
+
+$loggerProvider->
