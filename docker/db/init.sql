@@ -9,5 +9,6 @@ CREATE TABLE IF NOT EXISTS users (
 
 INSERT INTO users (name, email) VALUES
     ('Alice Dupont', 'alice@example.com'),
-    ('Bob Martin', 'bob@example.com')
+    ('Bob Martin', 'bob@example.com'),
+    ('Charlie Durand', 'charlie@example.com', '2026-01-21 10:30:00')
 ON DUPLICATE KEY UPDATE name = VALUES(name);

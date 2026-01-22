@@ -19,4 +19,4 @@ ingester:
 storage:
   trace:
     local:
-      path: /tmp/tempo/blocks
+      path: /var/tempo/blocks

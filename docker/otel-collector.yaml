@@ -8,15 +8,14 @@ receivers:
 
 processors:
   batch:
-  groupbyattrs:
-    keys: []
 
 exporters:
-  otlphttp:
+  otlp_http/loki:
     endpoint: "http://loki:3100/otlp"
-  # prometheus:
-  #   endpoint: "0.0.0.0:8889"
-  # otlp/tempo:
+  prometheus:
+    endpoint: "0.0.0.0:8889"
+  otlp/tempo:
+    endpoint: "tempo:3200"
   debug:
     verbosity: detailed
 service:
@@ -24,15 +23,16 @@ service:
     logs:
       receivers: [otlp]
       processors: [batch]
-      exporters: [otlphttp, debug]
+      exporters: [otlp_http/loki]
+    metrics:
+      receivers: [otlp]
+      processors: [groupbyattrs, batch]
+      exporters: [prometheus]
     # metrics:
     # receivers: [otlp]
     # processors: [cumulativetodelta]
     # exporters: [prometheus]
-    # metrics:
-    #  receivers: [otlp]
-    #  processors: [groupbyattrs, batch]
-    #  exporters: [debug, prometheus]
+
     # traces:
     #  receivers: [otlp]
     #  processors: [batch]
