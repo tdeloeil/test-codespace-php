@@ -29,5 +29,3 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 var_dump($users);
 
 $logger->info('Fetched users from database', ['user_count' => count($users)]);
-
-$loggerProvider->
