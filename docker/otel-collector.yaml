@@ -3,8 +3,6 @@ receivers:
     protocols:
       grpc:
         endpoint: 0.0.0.0:4317
-      http:
-        endpoint: 0.0.0.0:4318
 
 processors:
   batch:
@@ -14,14 +12,9 @@ processors:
 exporters:
   prometheus:
     endpoint: "0.0.0.0:8889"
-  otlphttp/logs:
+  otlp/logs:
     endpoint: "http://loki:3100/otlp"
-    tls:
-      insecure: true
   otlp/tempo:
-    endpoint: "tempo:4317"
-    tls:
-      insecure: true
   debug:
     verbosity: detailed
 
@@ -31,15 +24,15 @@ service:
     # receivers: [otlp]
     # processors: [cumulativetodelta]
     # exporters: [prometheus]
-    metrics:
-      receivers: [otlp]
-      processors: [groupbyattrs, batch]
-      exporters: [debug, prometheus]
+    # metrics:
+    #  receivers: [otlp]
+    #  processors: [groupbyattrs, batch]
+    #  exporters: [debug, prometheus]
     logs:
       receivers: [otlp]
       processors: [batch]
-      exporters: [otlphttp/logs]
-    traces:
-      receivers: [otlp]
-      processors: [batch]
-      exporters: [otlp/tempo]
+      exporters: [otlp/logs, debug]
+    # traces:
+    #  receivers: [otlp]
+    #  processors: [batch]
+    #  exporters: [otlp/tempo]

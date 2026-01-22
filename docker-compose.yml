@@ -81,7 +81,7 @@
       volumes:
         - ./docker/otel-collector.yaml:/etc/otel-collector-config.yaml:ro
       ports:
-        - 4318:4318
+        - 4317:4317
         - 8889:8889
     tempo:
       image: grafana/tempo:latest
