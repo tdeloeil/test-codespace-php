@@ -17,8 +17,6 @@ $user = getenv('DB_USER');
 $password = getenv('DB_PASSWORD');
 $mailer_dsn = getenv('MAILER_DSN');
 
-//die('banana');
-
 $config_dsn = parse_dns($mailer_dsn);
 
 // Init Telemetry

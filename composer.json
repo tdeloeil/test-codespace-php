@@ -2,7 +2,7 @@
     "name": "deloeit/tes-codespace",
     "autoload": {
         "psr-4": {
-            "Deloeit\\TesCodespace\\": "src/"
+            "App\\": "src/"
         }
     },
     "authors": [

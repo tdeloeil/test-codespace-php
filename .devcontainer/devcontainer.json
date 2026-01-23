@@ -40,6 +40,8 @@
         "xdebug.php-debug",
         "junstyle.php-cs-fixer",
 
+        "eamodio.gitlens",
+
         "Catppuccin.catppuccin-vsc",
         "Catppuccin.catppuccin-vsc-icons",
 
