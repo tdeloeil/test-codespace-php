@@ -35,6 +35,7 @@
         "bmewburn.vscode-intelephense-client",
         "xdebug.php-debug",
         "junstyle.php-cs-fixer",
+        "recca0120.vscode-phpunit",
 
         "Catppuccin.catppuccin-vsc",
         "Catppuccin.catppuccin-vsc-icons",

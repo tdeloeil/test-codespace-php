@@ -9,8 +9,6 @@
       ports:
         - "8080:80"
       command: apache2-foreground
-      extra_hosts:
-        - "host.docker.internal:host-gateway"
       environment:
         - DB_HOST=${DB_HOST}
         - DB_PORT=${DB_PORT}

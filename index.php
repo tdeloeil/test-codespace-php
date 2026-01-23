@@ -40,7 +40,6 @@ $mail = new PHPMailer(true);
 // Init Database
 $pdo = new PDO("mysql:host=$host;port=$port;dbname=$dbname", $user, $password);
 
-
 // TODO: Test Something
 // DEBUG: F5
 
@@ -63,15 +62,15 @@ try {
     $mail->Host = $config_dsn["host"];
     $mail->Port = $config_dsn["port"];
     $mail->SMTPAuth = false;
-    
+
     $mail->setFrom('test@example.com', 'Testeur');
     $mail->addAddress('destinataire@test.com', 'Destinataire');
-    
+
     $mail->isHTML(true);
     $mail->Subject = 'Email de test PHPMailer';
     $mail->Body    = "<h1>test mail</h1>$json";
-    
-    $mail->send();    
+
+    $mail->send();
 } catch (Exception $e) {
     $logger->error("Send email", [
         'err' => $e->getMessage()
