@@ -42,6 +42,7 @@ $pdo = new PDO("mysql:host=$host;port=$port;dbname=$dbname", $user, $password);
 
 
 // TODO: Test Something
+// DEBUG: F5
 
 // Query table user
 $span_sql = $tracer

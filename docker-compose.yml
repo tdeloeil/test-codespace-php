@@ -9,6 +9,8 @@
       ports:
         - "8080:80"
       command: apache2-foreground
+      extra_hosts:
+        - "host.docker.internal:host-gateway"
       environment:
         - DB_HOST=${DB_HOST}
         - DB_PORT=${DB_PORT}
@@ -16,12 +18,6 @@
         - DB_USER=${DB_USER}
         - DB_PASSWORD=${DB_PASSWORD}
         - MAILER_DSN=${MAILER_DSN}
-
-        - XDEBUG_MODE=debug
-        - XDEBUG_CLIENT_HOST=host.docker.internal
-        - XDEBUG_CLIENT_PORT=9003
-        - XDEBUG_START_WITH_REQUEST=yes
-        - XDEBUG_DISCOVER_CLIENT_HOST=1
         
         - OTEL_PHP_AUTOLOAD_ENABLED=true
         - OTEL_LOGS_EXPORTER=otlp
