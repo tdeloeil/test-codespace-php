@@ -1,9 +1,7 @@
 <?php
 
 function parse_dns(string $dsn): array {
-    $parsed = parse_url($dsn);
-    var_dump($parsed, $dsn);
-    
+    $parsed = parse_url($dsn);    
     return [
         'host' => $parsed['host'] ?? 'localhost',
         'port' => $parsed['port'] ?? 25,

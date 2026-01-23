@@ -17,7 +17,8 @@ $user = getenv('DB_USER');
 $password = getenv('DB_PASSWORD');
 $mailer_dsn = getenv('MAILER_DSN');
 
-var_dump($mailer_dsn);
+//die('banana');
+
 $config_dsn = parse_dns($mailer_dsn);
 
 // Init Telemetry
@@ -52,7 +53,7 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $span_sql->end();
 
 // Handler users
-$json = json_encode($users, JSON_PRETTY_PRINT);
+$json = json_encode($users);
 $logger->info('Fetched users from database', ['user_count' => count($users)]);
 
 // Send email
@@ -65,7 +66,7 @@ try {
     $mail->setFrom('test@example.com', 'Testeur');
     $mail->addAddress('destinataire@test.com', 'Destinataire');
     
-    $mail->isHTML();
+    $mail->isHTML(true);
     $mail->Subject = 'Email de test PHPMailer';
     $mail->Body    = "<h1>test mail</h1>$json";
     

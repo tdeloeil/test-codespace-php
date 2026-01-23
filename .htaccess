@@ -1,5 +1,8 @@
 RewriteEngine On
 RewriteBase /
 
+RewriteRule ^\.well-known/ - [R=404,L]
+
 RewriteRule ^public(/.*)?$ - [L]
+RewriteRule ^favicon\.ico$ - [L]
 RewriteRule ^.*$ index.php [L,QSA]

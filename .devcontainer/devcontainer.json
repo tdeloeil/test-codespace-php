@@ -28,6 +28,9 @@
     },
     "8025": {
       "label": "Mailpit"
+    },
+    "9003": {
+      "label": "Xdebug"
     }
   },
   "customizations": {

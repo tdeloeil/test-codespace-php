@@ -17,6 +17,8 @@
         - DB_PASSWORD=${DB_PASSWORD}
         - MAILER_DSN=${MAILER_DSN}
 
+        - XDEBUG_MODE=debug
+
         - OTEL_PHP_AUTOLOAD_ENABLED=true
         - OTEL_LOGS_EXPORTER=otlp
         - OTEL_TRACES_EXPORTER=otlp
