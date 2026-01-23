@@ -1,6 +1,6 @@
 FROM mcr.microsoft.com/devcontainers/php:1-8.2-bullseye
 
-RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
+RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor | tee /usr/share/keyrings/yarnkey.gpg >/dev/null
 
 RUN apt-get update \
     && docker-php-ext-install pdo pdo_mysql \
