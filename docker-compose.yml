@@ -15,6 +15,7 @@
         - DB_NAME=${DB_NAME}
         - DB_USER=${DB_USER}
         - DB_PASSWORD=${DB_PASSWORD}
+        - MAILER_DSN=${MAILER_DSN}
 
         - OTEL_PHP_AUTOLOAD_ENABLED=true
         - OTEL_LOGS_EXPORTER=otlp
@@ -58,7 +59,7 @@
       container_name: phpmyadmin
       restart: unless-stopped
       ports:
-        - "8081:8080"
+        - 8081:80
       environment:
         PMA_HOST: ${DB_HOST}
         PMA_USER: ${DB_USER}

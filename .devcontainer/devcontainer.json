@@ -13,7 +13,8 @@
     8080,
     8081,
     3000,
-    8025
+    8025,
+    9003
   ],
   "portsAttributes": {
     "8080": {
@@ -47,7 +48,7 @@
       "settings": {
         "workbench.colorTheme": "Catppuccin Frappé",
         "workbench.iconTheme": "catppuccin-latte",
-        "php.validate.executablePath": "/usr/bin/php"
+        "php.validate.executablePath": "/usr/local/bin/php"
       }
     }
   },

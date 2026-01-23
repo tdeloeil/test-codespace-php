@@ -6,7 +6,7 @@ FROM mcr.microsoft.com/devcontainers/php:1-8.2-bullseye
 RUN rm -f /etc/apt/sources.list.d/yarn.list
 
 RUN apt-get update \
-    && docker-php-ext-install pdo pdo_mysql \
+    && docker-php-ext-install pdo pdo_mysql xdebug \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
