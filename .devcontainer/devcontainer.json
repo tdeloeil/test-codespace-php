@@ -28,11 +28,21 @@
   "customizations": {
     "vscode": {
       "extensions": [
-        "ikappas.composer",
         "bmewburn.vscode-intelephense-client",
-        "ms-azuretools.vscode-docker"
+        "xdebug.php-debug",
+        "junstyle.php-cs-fixer",
+
+        "Catppuccin.catppuccin-vsc",
+        "Catppuccin.catppuccin-vsc-icons",
+
+        "ikappas.composer",
+        "ms-azuretools.vscode-docker",
+        "Gruntfuggly.todo-tree",
+        "esbenp.prettier-vscode"
       ],
       "settings": {
+        "workbench.colorTheme": "Catppuccin Frappé",
+        "workbench.iconTheme": "catppuccin-latte",
         "php.validate.executablePath": "/usr/bin/php"
       }
     }
