@@ -9,12 +9,7 @@
   "remoteEnv": {
     "DOCKER_API_VERSION": "1.43"
   },
-  "forwardPorts": [
-    8080,
-    8081,
-    3000,
-    8025
-  ],
+  "forwardPorts": [8080, 8081, 3000, 8025],
   "portsAttributes": {
     "8080": {
       "label": "Application PHP"
@@ -40,20 +35,24 @@
         "eamodio.gitlens",
         "usernamehw.errorlens",
 
-
         "Catppuccin.catppuccin-vsc",
         "Catppuccin.catppuccin-vsc-icons",
 
         "ikappas.composer",
         "ms-azuretools.vscode-docker",
-        "Gruntfuggly.todo-tree",
-        "esbenp.prettier-vscode"
+        "Gruntfuggly.todo-tree"
       ],
       "settings": {
         "workbench.colorTheme": "Catppuccin Frappé",
         "workbench.iconTheme": "catppuccin-latte",
         "php.validate.executablePath": "/usr/local/bin/php",
-        "editor.formatOnSave": true
+        "[php]": {
+          "editor.defaultFormatter": "junstyle.php-cs-fixer",
+          "editor.formatOnSave": true
+        },
+        "php-cs-fixer.executablePath": "${workspaceFolder}/vendor/bin/php-cs-fixer",
+
+        "php.suggest.basic": false
       }
     }
   },

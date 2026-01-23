@@ -1,7 +1,8 @@
 <?php
 
-require_once __DIR__ . '/vendor/autoload.php';
-require_once "./utils.php";
+require_once __DIR__.'/vendor/autoload.php';
+
+require_once './utils.php';
 
 use Monolog\Logger;
 use OpenTelemetry\API\Globals;
@@ -29,14 +30,15 @@ $meter = Globals::meterProvider()->getMeter('app-meter');
 $tracer = Globals::tracerProvider()->getTracer('demo');
 $span = $tracer
     ->spanBuilder('global-span')
-    ->startSpan();
+    ->startSpan()
+;
 $scope = $span->activate();
 
 // Init Mailer
 $mail = new PHPMailer(true);
 
 // Init Database
-$pdo = new PDO("mysql:host=$host;port=$port;dbname=$dbname", $user, $password);
+$pdo = new PDO("mysql:host={$host};port={$port};dbname={$dbname}", $user, $password);
 
 // TODO: Test Something
 // DEBUG: F5
@@ -45,8 +47,9 @@ $pdo = new PDO("mysql:host=$host;port=$port;dbname=$dbname", $user, $password);
 $span_sql = $tracer
     ->spanBuilder('sql-query-span')
     ->setSpanKind(SpanKind::KIND_CLIENT)
-    ->startSpan();
-$stmt = $pdo->query("SELECT * FROM users");
+    ->startSpan()
+;
+$stmt = $pdo->query('SELECT * FROM users');
 $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $span_sql->end();
 
@@ -57,8 +60,8 @@ $logger->info('Fetched users from database', ['user_count' => count($users)]);
 // Send email
 try {
     $mail->isSMTP();
-    $mail->Host = $config_dsn["host"];
-    $mail->Port = $config_dsn["port"];
+    $mail->Host = $config_dsn['host'];
+    $mail->Port = $config_dsn['port'];
     $mail->SMTPAuth = false;
 
     $mail->setFrom('test@example.com', 'Testeur');
@@ -66,12 +69,12 @@ try {
 
     $mail->isHTML(true);
     $mail->Subject = 'Email de test PHPMailer';
-    $mail->Body    = "<h1>test mail</h1>$json";
+    $mail->Body = "<h1>test mail</h1>{$json}";
 
     $mail->send();
 } catch (Exception $e) {
-    $logger->error("Send email", [
-        'err' => $e->getMessage()
+    $logger->error('Send email', [
+        'err' => $e->getMessage(),
     ]);
 }
 
@@ -79,20 +82,9 @@ try {
 header('Content-Type: application/json; charset=utf-8');
 echo $json;
 
-
 // End tracing
 $span->end();
 $scope->detach();
-
-echo 1+1;
-$scope->dzefezf();
-
-
-
-
-
-
-
 
 exit;
 
