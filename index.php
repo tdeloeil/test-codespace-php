@@ -4,6 +4,7 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 use Monolog\Logger;
 use OpenTelemetry\API\Globals;
+use OpenTelemetry\API\Trace\SpanKind;
 use OpenTelemetry\Contrib\Logs\Monolog\Handler;
 use Psr\Log\LogLevel;
 
@@ -25,7 +26,7 @@ $tracer = Globals::tracerProvider()->getTracer('demo');
 $span = $tracer
     ->spanBuilder('global-span')
     ->startSpan();
-
+$scope = $span->activate();
 
 $pdo = new PDO("mysql:host=$host;port=$port;dbname=$dbname", $user, $password);
 
@@ -34,6 +35,7 @@ echo "Connected to database '$dbname' on host '$host' successfully.";
 // query table user
 $span_sql = $tracer
     ->spanBuilder('sql-query-span')
+    ->setSpanKind(SpanKind::KIND_CLIENT)
     ->startSpan();
 $stmt = $pdo->query("SELECT * FROM users");
 $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -47,6 +49,7 @@ $logger->info('Fetched users from database', ['user_count' => count($users)]);
 
 
 $span->end();
+$scope->detach();
 
 
 exit;

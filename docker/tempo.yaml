@@ -17,8 +17,24 @@ ingester:
         store: inmemory
       replication_factor: 1
 
+metrics_generator:
+  registry:
+    external_labels:
+      source: tempo
+      cluster: docker-compose
+  storage:
+    path: /var/tempo/generator/wal
+    remote_write:
+      - url: http://prometheus:9090/api/v1/write
+        send_exemplars: true
+
 storage:
   trace:
     backend: local
     local:
       path: /var/tempo/blocks
+
+overrides:
+  defaults:
+    metrics_generator:
+      processors: [local-blocks, service-graphs, span-metrics]
