@@ -84,11 +84,8 @@ echo $json;
 $span->end();
 $scope->detach();
 
-
-
-
-
-
+echo 1+1;
+$scope->dzefezf();
 
 
 
