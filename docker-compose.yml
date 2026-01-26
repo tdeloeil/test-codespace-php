@@ -150,32 +150,32 @@
         # - ./promtail/promtail-config.yml:/etc/promtail/config.yml:ro
         - /var/log:/var/log:ro
       command: -config.file=/etc/promtail/config.yml
-  garage:
-    image: dxflrs/garage:v1.0.1
-    container_name: garage
-    volumes:
-      - ./docker/garage.toml:/etc/garage.toml
-      - garage-meta:/var/lib/garage/meta
-      - garage-data:/var/lib/garage/data
-    restart: unless-stopped
-    ports:
-       - 3900:3900
-  webui:
-    image: khairul169/garage-webui:latest
-    container_name: garage-webui
-    restart: unless-stopped
-    volumes:
-      - ./docker/garage.toml:/etc/garage.toml:ro
-    ports:
-      - 3909:3909
-    environment:
-      API_BASE_URL: "http://garage:3902"
-      S3_ENDPOINT_URL: "http://garage:3900" 
+  # garage:
+  #   image: dxflrs/garage:v1.0.1
+  #   container_name: garage
+  #   volumes:
+  #     - ./docker/garage.toml:/etc/garage.toml
+  #     - garage-meta:/var/lib/garage/meta
+  #     - garage-data:/var/lib/garage/data
+  #   restart: unless-stopped
+  #   ports:
+  #      - 3900:3900
+  # webui:
+  #   image: khairul169/garage-webui:latest
+  #   container_name: garage-webui
+  #   restart: unless-stopped
+  #   volumes:
+  #     - ./docker/garage.toml:/etc/garage.toml:ro
+  #   ports:
+  #     - 3909:3909
+  #   environment:
+  #     API_BASE_URL: "http://garage:3902"
+  #     S3_ENDPOINT_URL: "http://garage:3900" 
   
   volumes:
     mysql-data:
     grafana-data:
     tempo-data:
     loki_data:
-    garage-meta:
-    garage-data:
+    # garage-meta:
+    # garage-data:

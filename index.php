@@ -38,7 +38,10 @@ $scope = $span->activate();
 $mail = new PHPMailer(true);
 
 // Init Database
-$pdo = new PDO("mysql:host={$host};port={$port};dbname={$dbname}", $user, $password);
+$pdo = new PDO("mysql:host=$host;port=$port;dbname=$dbname", $user, $password);
+
+
+
 
 // TODO: Test Something
 // DEBUG: F5
