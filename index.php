@@ -26,6 +26,9 @@ $handler = new Handler($loggerProvider, LogLevel::INFO);
 
 $logger = new Logger('otel-logger', [$handler]);
 $meter = Globals::meterProvider()->getMeter('app-meter');
+$requestCounter = $meter->createCounter('app_requests_total', 'requests', 'Nombre total de requêtes HTTP par jour');
+$today = date('Y-m-d');
+$requestCounter->add(1, ['endpoint' => 'users']);
 
 $tracer = Globals::tracerProvider()->getTracer('demo');
 $span = $tracer
@@ -38,10 +41,7 @@ $scope = $span->activate();
 $mail = new PHPMailer(true);
 
 // Init Database
-$pdo = new PDO("mysql:host=$host;port=$port;dbname=$dbname", $user, $password);
-
-
-
+$pdo = new PDO("mysql:host={$host};port={$port};dbname={$dbname}", $user, $password);
 
 // TODO: Test Something
 // DEBUG: F5
@@ -89,6 +89,8 @@ echo $json;
 $span->end();
 $scope->detach();
 
+Globals::meterProvider()->forceFlush();
+
 exit;
 
 $counter = $meter->createCounter('users_fetched_total', 'users', 'Nombre total de users fetchés');
@@ -96,5 +98,3 @@ $counter->add(1, ['environment' => 'development']);
 
 $histogram = $meter->createHistogram('http_request_duration', 'ms', 'Durée des requêtes');
 $histogram->record(125.5, ['endpoint' => '/api/users']);
-
-Globals::meterProvider()->forceFlush();
